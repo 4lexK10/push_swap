@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_fct.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akloster <akloster@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/05 11:47:35 by akloster          #+#    #+#             */
+/*   Updated: 2024/02/05 11:47:38 by akloster         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-#include <stdbool.h>
 
 static bool real_check(char *s)
 {
@@ -15,7 +26,7 @@ static bool real_check(char *s)
 	return (1);
 }
 
-static bool	overflow_check(char *s)
+bool	overflow_check(char *s)
 {
 	int	res;
 
@@ -27,31 +38,13 @@ static bool	overflow_check(char *s)
 	return (0);
 }
 
-bool	ft_check(char **s, int max)
+int		ft_check(char **s, int max)
 {
-    int	i;
-	int	j;
-
-	i = 1;
-	j = -1;
-	if (!s)
+	if (check_argtype(s[1]))
+		return (2);
+	if (!s || max < 2 || check_dup(s, max))
 		return (1);
-	while (i < max)
-	{
-		if (!s[i] || s[i][0] == '\0')
-			return (1);
-		if (s[i][0] == '-')
-			if (s[i][++j + 1] == '\0')
-				return (1);
-		while (s[i][++j] != '\0')
-			if (s[i][j] < '0' || s[i][j] > '9')
-				return (1);
-		if (overflow_check(s[i]))
-			return (1);
-		++i;
-		j = -1;
-	} 
-	return (0);
+	return (ft_char_check(s, max));
 }
 
 t_stack	*ft_mod_lstnew(int content)
@@ -62,6 +55,8 @@ t_stack	*ft_mod_lstnew(int content)
 	if (!new_node)
 		return (NULL);
 	new_node->content = content;
+	new_node->nbr = 0;
+	new_node->cost = 0;
 	new_node->next = NULL;
 	return (new_node);
 }

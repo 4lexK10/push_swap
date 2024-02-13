@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
-#include <limits.h>
 
 static int	overflow(long sign)
 {
@@ -64,7 +62,7 @@ void	ft_mod_lstclear(t_stack **lst)
 	}
 }
 
-t_stack	*create_stack_a(char **args, int size)
+t_stack	*create_stack(char **args, int size)
 {
 	int		i;
 	t_stack	*head;
@@ -74,7 +72,7 @@ t_stack	*create_stack_a(char **args, int size)
 	head = ft_mod_lstnew(ft_atoi(args[i]));
 	curr = head;
 	while (--size - 1 > 0)
-	{
+	{	
 		curr->next = ft_mod_lstnew(ft_atoi(args[++i]));
 		if (curr->next == NULL)
 			return (ft_mod_lstclear(&head), NULL);
@@ -83,13 +81,17 @@ t_stack	*create_stack_a(char **args, int size)
 	return (head);
 }
 
-/* #include <stdlib.h>
-
-int main(int ac, char **av)
+int	ft_mod_lstsize(t_stack *lst)
 {
-	if (ac != 2)
+	int	size;
+
+	size = 1;
+	if (!lst)
 		return (0);
-	printf("ft_atoi = %d\n", ft_atoi(av[1]));
-	printf("atoi    = %d\n", atoi(av[1]));
-	return(0);
-} */
+	while (lst->next != NULL)
+	{
+		lst = lst->next;
+		++size;
+	}
+	return (size);
+}

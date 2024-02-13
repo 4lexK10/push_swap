@@ -6,37 +6,38 @@
 #    By: akloster <akloster@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 14:52:12 by akloster          #+#    #+#              #
-#    Updated: 2024/01/16 14:43:49 by akloster         ###   ########.fr        #
+#    Updated: 2024/02/05 12:05:41 by akloster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC				= gcc
+CC				=	gcc
 
-NAME			= push_swap
+NAME			=	push_swap
 
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror
 
-SRC				= helper_fct.c helper_fct_1.c push_swap.c
+SRC				=	helper_fct.c helper_fct_1.c helper_fct_2.c push_swap.c \
+					operations.c algo.c
 
-FT_PRINTF		= ft_printf/libftprintf.a
+FT_PRINTF		=	ft_printf/libftprintf.a
 
-LIBFT			= libft/libft.a
+LIBFT			=	libft/libft.a
 
-OBJ_DIR			= objs/
+OBJ_DIR			=	objs/
 
-OBJ				= $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+OBJ				=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-RM				= rm -rf
+RM				=	rm -rf
 
-$(NAME):	$(OBJ_DIR) $(OBJ)
+$(NAME):		$(OBJ_DIR) $(OBJ)
 				make -C ./ft_printf
 				make bonus -C ./libft
-			 $(CC) $(FLAGS) $(OBJ) $(FT_PRINTF) $(LIBFT) -o $@
+				$(CC) $(FLAGS) $(OBJ) $(FT_PRINTF) $(LIBFT) -o $@
 
-all:		$(NAME)
+all:			$(NAME)
 
 $(OBJ_DIR)%.o:%.c
-	gcc $(CFLAGS) -I . -c $< -o $@
+				gcc $(CFLAGS) -I . -c $< -o $@
 
 $(OBJ_DIR):	
 				@mkdir -p $(OBJ_DIR)
