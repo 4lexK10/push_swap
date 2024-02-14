@@ -12,15 +12,18 @@
 
 #include "push_swap.h"
 
-/* int	find_opti(t_stack **a)
+/* int	sort_descending(t_stack **b)
 {
-	
+	put_order(b);
+	if ((*b)->nbr == 0)
+	{
+
+	}
 }
 
 void	turk_algo(t_stack **stack_a, t_stack **stack_b)
 {
-	push(stack_b, stack_a);
-	push(stack_b, stack_a);
+
 	while ((*stack_a)->next != NULL)
 	{
 

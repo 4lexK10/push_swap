@@ -30,6 +30,13 @@ void	push(t_stack **a, t_stack **b)
 
 	if (!*b)
 		return ;
+	if (!*a)
+	{
+		*a = *b;
+		*b = (*b)->next;
+		(*a)->next = NULL;
+		return ;
+	}
 	temp = *b;
 	if (temp->next == NULL)
 	{

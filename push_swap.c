@@ -31,12 +31,10 @@ int main(int ac, char **av)
 	if (ft_check(av, ac) == 1)
 		return (ft_printf("Error\n"));
 	head_a = create_stack(av, ac);
-	head_b = create_stack(av, ac);
-/* 	push(&head, &head_b);
-	push(&head, &head_b);
-	push(&head, &head_b);
-	r_rotate(&head);
-	rotate(&head_b); */
+	head_b = NULL;
+	push(&head_b, &head_a);
+	push(&head_b, &head_a);
+	push(&head_b, &head_a);
 	put_order(&head_a);
 	put_order(&head_b);
 	curr_a = head_a;
