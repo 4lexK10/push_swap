@@ -52,28 +52,29 @@ void	ft_mod_lstclear(t_stack **lst)
 
 	if (!lst || !(*lst))
 		return ;
-	temp = *lst;
-	*lst = NULL;
-	while (temp != NULL)
+	temp = (*lst)->next;
+	while (temp != lst)
 	{
-		prev = temp;
+		free(temp->previous);
 		temp = temp->next;
-		free(prev);
 	}
 }
 
-t_stack	*create_stack(char **args, int size)
+t_stack	*create_stack(char **args, int size, t_stack **first)
 {
 	int		i;
 	t_stack	*head;
 	t_stack	*curr;
 
+
 	i = 1;
-	head = ft_mod_lstnew(ft_atoi(args[i]));
+	head = ft_mod_lstnew(ft_atoi(args[i]), head);
+	if (!head)
+		return (NULL);
 	curr = head;
 	while (--size - 1 > 0)
 	{	
-		curr->next = ft_mod_lstnew(ft_atoi(args[++i]));
+		curr->next = ft_mod_lstnew(ft_atoi(args[++i]), head);
 		if (curr->next == NULL)
 			return (ft_mod_lstclear(&head), NULL);
 		curr = curr->next;

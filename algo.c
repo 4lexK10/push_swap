@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+/* #include "push_swap.h"
 
-/* int	sort_descending(t_stack **b)
+int	sort_descending(t_stack **b)
 {
 	put_order(b);
 	if ((*b)->nbr == 0)

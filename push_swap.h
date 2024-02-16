@@ -24,15 +24,16 @@ typedef struct s_stack
 	int				nbr;
 	int				content;
 	int				cost;
+	struct s_stack	*previous;
 	struct s_stack	*next;
 }					t_stack;
 
 int		ft_check(char **s, int max);
 int		ft_mod_atoi(const char *str);
-t_stack	*ft_mod_lstnew(int content);
+t_stack	*ft_mod_lstnew(int content, t_stack **first);
 void	ft_mod_lstadd_back(t_stack **lst, t_stack *new);
 void	ft_mod_lstclear(t_stack **lst);
-t_stack	*create_stack(char **args, int size);
+t_stack	*create_stack(char **args, int size, t_stack **head);
 void	swap(t_stack **stack);
 void	push(t_stack **a, t_stack **b);
 int		ft_mod_lstsize(t_stack *lst);

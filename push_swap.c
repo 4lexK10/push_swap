@@ -19,7 +19,7 @@ int main(int ac, char **av)
 	t_stack	*curr_a;
 	t_stack	*curr_b;
 	int		i;
-	
+	 
 	i = 0;
 	if (ft_check(av, ac) == 2)
 	{
@@ -30,8 +30,9 @@ int main(int ac, char **av)
 	}
 	if (ft_check(av, ac) == 1)
 		return (ft_printf("Error\n"));
-	head_a = create_stack(av, ac);
+	head_a = NULL;
 	head_b = NULL;
+	head_a = create_stack(av, ac, &head_a);
 	push(&head_b, &head_a);
 	push(&head_b, &head_a);
 	push(&head_b, &head_a);

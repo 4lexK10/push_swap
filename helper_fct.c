@@ -47,17 +47,27 @@ int		ft_check(char **s, int max)
 	return (ft_char_check(s, max));
 }
 
-t_stack	*ft_mod_lstnew(int content)
+t_stack	*ft_mod_lstnew(int content, t_stack **head)
 {
 	t_stack	*new_node;
+	t_stack	*first;
 
+	first = *head;
 	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (!new_node)
 		return (NULL);
+	if (*head == NULL)
+		first = new_node;
 	new_node->content = content;
 	new_node->nbr = 0;
 	new_node->cost = 0;
-	new_node->next = NULL;
+	new_node->next = first;
+	new_node->previous = first->previous;
+	if (first != new_node)
+	{
+		first->previous->next = new_node;
+		first->previous = new_node;
+	}
 	return (new_node);
 }
 
