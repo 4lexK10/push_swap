@@ -79,14 +79,14 @@ int	ft_char_check(char **s, int max)
 	return (0);
 }
 
-void	put_order(t_stack **stack)
+void	put_order(t_stack *stack)
 {
 	t_stack	*temp;
 	t_stack	*current;
 	int		count;
 
-	current = *stack;
-	temp = *stack;
+	current = stack;
+	temp = stack;
 	count = 0;
 	while (current != NULL)
 	{
@@ -96,7 +96,7 @@ void	put_order(t_stack **stack)
 				++count;
 			temp = temp->next;
 		}
-		temp = *stack;
+		temp = stack;
 		current->nbr = count;
 		count = 0;
 		current = current->next;

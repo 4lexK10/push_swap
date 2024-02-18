@@ -21,6 +21,7 @@ int main(int ac, char **av)
 	int		i;
 	 
 	i = 0;
+	printf("%d\n", ft_check(av, ac));
 	if (ft_check(av, ac) == 2)
 	{
 		av = ft_split(ft_strjoin("./pushswap ", av[1]), ' ');
@@ -33,11 +34,11 @@ int main(int ac, char **av)
 	head_a = NULL;
 	head_b = NULL;
 	head_a = create_stack(av, ac, &head_a);
+/* 	push(&head_b, &head_a);
 	push(&head_b, &head_a);
-	push(&head_b, &head_a);
-	push(&head_b, &head_a);
-	put_order(&head_a);
-	put_order(&head_b);
+	push(&head_b, &head_a); */
+	put_order(head_a);
+	put_order(head_b);
 	curr_a = head_a;
 	curr_b = head_b;
 	ft_printf("stack a\n");

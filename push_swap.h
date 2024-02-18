@@ -13,6 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <stdio.h> //  <----- TAKE OUT!!!
 # include <stdlib.h>
 # include <stdbool.h>
 # include <limits.h>
@@ -43,6 +44,6 @@ void	rotate(t_stack **stack);
 int		check_dup(char **s, int max);
 int		ft_char_check(char **s, int max);
 bool	overflow_check(char *s);
-void	put_order(t_stack **stack);
+void	put_order(t_stack *stack);
 
 #endif
