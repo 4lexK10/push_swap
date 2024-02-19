@@ -35,8 +35,8 @@ t_stack	*ft_mod_lstnew(int content, t_stack **first);
 void	ft_mod_lstadd_back(t_stack **lst, t_stack *new);
 void	ft_mod_lstclear(t_stack **lst);
 t_stack	*create_stack(char **args, int size, t_stack **head);
-void	swap(t_stack **stack);
-void	push(t_stack **a, t_stack **b);
+void	swap(t_stack *stack);
+void	push(t_stack **dest, t_stack **src);
 int		ft_mod_lstsize(t_stack *lst);
 bool	check_argtype(char *s);
 void	r_rotate(t_stack **stack);
@@ -44,6 +44,7 @@ void	rotate(t_stack **stack);
 int		check_dup(char **s, int max);
 int		ft_char_check(char **s, int max);
 bool	overflow_check(char *s);
-void	put_order(t_stack *stack);
+void	put_order(t_stack *stack, int ac);
+void	swap_int(int *a, int *b);
 
 #endif

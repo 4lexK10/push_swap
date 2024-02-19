@@ -79,26 +79,41 @@ int	ft_char_check(char **s, int max)
 	return (0);
 }
 
-void	put_order(t_stack *stack)
+void	put_order(t_stack *stack, int ac)
 {
 	t_stack	*temp;
 	t_stack	*current;
 	int		count;
+	int		i;
+	int		j;
 
+	i = ac;
+	j = ac;
+	if (!stack)
+		return ;
 	current = stack;
 	temp = stack;
 	count = 0;
-	while (current != NULL)
+	while (--i)
 	{
-		while (temp != NULL)
+		while (--j)
 		{
 			if (temp != current && temp->content < current->content)
 				++count;
 			temp = temp->next;
 		}
-		temp = stack;
+		j = ac;
 		current->nbr = count;
 		count = 0;
 		current = current->next;
 	}
+}
+
+void	swap_int(int *a, int *b)
+{
+	int temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }

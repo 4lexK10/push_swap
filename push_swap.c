@@ -21,7 +21,9 @@ int main(int ac, char **av)
 	int		i;
 	 
 	i = 0;
-	printf("%d\n", ft_check(av, ac));
+/* 	printf("%d\n", ft_check(av, ac)); */
+	if (ft_check(av, ac) == 3)
+		return (0);
 	if (ft_check(av, ac) == 2)
 	{
 		av = ft_split(ft_strjoin("./pushswap ", av[1]), ' ');
@@ -34,26 +36,45 @@ int main(int ac, char **av)
 	head_a = NULL;
 	head_b = NULL;
 	head_a = create_stack(av, ac, &head_a);
+	/* printf("%d\n", head_a->content); */
+	printf("%d %d\n", head_a->content, head_a->next->content);
+/* 	push(&head_b, &head_a); */
 /* 	push(&head_b, &head_a);
-	push(&head_b, &head_a);
 	push(&head_b, &head_a); */
-	put_order(head_a);
-	put_order(head_b);
+	printf("%d %d\n", head_a->content, head_a->next->content);
+/* 	swap(head_a);
+	swap(head_b);
+	rotate(&head_b); */
+	put_order(head_a, ac);
+	put_order(head_b, ac);
 	curr_a = head_a;
 	curr_b = head_b;
-	ft_printf("stack a\n");
-	while (curr_a != NULL)
+	printf("stack a\n");
+	if (head_a)
 	{
-		ft_printf("content: %d", curr_a->content);
-		ft_printf(" nbr:%d\n", curr_a->nbr);
+		printf("content:%d", curr_a->content);
+		printf(" nbr:%d\n", curr_a->nbr);
 		curr_a = curr_a->next;
+		while (curr_a != head_a)
+		{
+			printf("content:%d", curr_a->content);
+			printf(" nbr:%d\n", curr_a->nbr);
+			curr_a = curr_a->next;
+		}
 	}
-	ft_printf("stack b\n");
-	while (curr_b != NULL)
+	printf("stack b\n");
+	if (head_b)
 	{
-		ft_printf("content: %d", curr_b->content);
-		ft_printf(" nbr:%d\n", curr_b->nbr);
+		printf("content: %d", curr_b->content);
+		printf(" nbr:%d\n", curr_b->nbr);
 		curr_b = curr_b->next;
+		while (curr_b != head_b)
+		{
+			printf("content: %d", curr_b->content);
+			printf(" nbr:%d\n", curr_b->nbr);
+			curr_b = curr_b->next;
+		}
 	}
+	printf("test\n");
 	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), 0);
 }

@@ -12,79 +12,62 @@
 
 #include "push_swap.h"
 
-void	swap(t_stack **stack)
+void	swap(t_stack *stack)
 {
-	t_stack	*temp;
-	
-	if (ft_mod_lstsize(*stack) < 2)
+	if (ft_mod_lstsize(stack) < 2)
+	{
+		printf("%dtest\n", ft_mod_lstsize(stack));
 		return ;
-	temp = *stack;
-	*stack = (*stack)->next;
-	temp->next = (*stack)->next;
-	(*stack)->next = temp;
+	}
+	swap_int(&(stack->content), &(stack->next->content));
+	swap_int(&(stack->cost), &(stack->next->cost));
+	swap_int(&(stack->nbr), &(stack->next->nbr));
 }
 
-void	push(t_stack **a, t_stack **b)
+int	push(t_stack **dest, t_stack **src)
 {
 	t_stack	*temp;
 
-	if (!*b)
+	if (!*src)
 		return ;
-	if (!*a)
+	temp = (*src)->next;
+	(*src)->next->previous = (*src)->previous;
+	(*src)->previous->next = (*src)->next;
+	if (!*dest)
 	{
-		*a = *b;
-		*b = (*b)->next;
-		(*a)->next = NULL;
-		return ;
+		*dest = ft_mod_lstnew((*src)->content, dest);
+		if (!(*dest))
+			return (ft_mod_lstclear(src), 1);
+		temp = *src;
+		*src = (*src)->next;
+		(*src)->previous->next = (*src)->next;
+		return (ft_mod_lstclear(src), 0);
 	}
-	temp = *b;
-	if (temp->next == NULL)
-	{
-		temp->next = *a;
-		*a = temp;
-		*b = NULL;
-		return ;
-	}
-	*b = temp->next;
-	temp->next = *a;
-	*a = temp;
+	(*src)->next = *dest;
+	(*src)->previous = (*dest)->previous;
+	(*dest)->previous->next = *src;
+	(*dest)->previous = *src;
+	*src = temp;
+	if ((*src)->next == *src)
+		ft_mod_lstclear(src);
+	return (0);
 }
 
 void	rotate(t_stack **stack)
 {
-	t_stack *temp;
-	t_stack *op;
-
-	if (!*stack || !((*stack)->next))
+	if (!(*stack) || (*stack)->next == *stack)
 		return ;
-	temp = *stack;
-	op = *stack;
-	if (temp->next == NULL)
-		return ;
-	while (temp->next != NULL)
-		temp = temp->next;
-	(*stack) = (*stack)->next;
-	temp->next = op;
-	op->next = NULL;
+	*stack = (*stack)->next;
 }
 
 void	r_rotate(t_stack **stack)
 {
-	t_stack *temp;
-
-	if (!*stack || !((*stack)->next))
+	if (!(*stack) || (*stack)->next == *stack)
 		return ;
-	temp = *stack;
-	if (temp->next == NULL)
-		return;
-	while (temp->next->next != NULL)
-		temp = temp->next;
-	temp->next->next = *stack;
-	*stack = temp->next;
-	temp->next = NULL;
+	*stack = (*stack)->previous;
 }
 
-/* int main(char **av, int ac)
+/* int main(char **destv, int ac)
 {
 	t_stack *test;
 	
@@ -92,7 +75,7 @@ void	r_rotate(t_stack **stack)
 		return (0);
 	test = create_stack_a(av, ac);
 	swap(test);
-	ft_printf("%d, %d\n", test->nbr, test->next->nbr);
+	printf("%d, %d\n", test->nbr, test->next->nbr);
 
 	return (0);
 } */

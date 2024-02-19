@@ -49,10 +49,15 @@ void	ft_mod_lstclear(t_stack **lst)
 {
 	t_stack	*temp;
 	t_stack	*prev;
+	int i;
 
+	i = 0;
 	if (!lst || !(*lst))
 		return ;
 	temp = (*lst)->next;
+	prev = temp;
+	if ((*lst)->next == *lst)
+		printf("it does! %d\n", ++i);
 	while (temp != *lst)
 	{
 		free(temp->previous);
@@ -73,28 +78,30 @@ t_stack	*create_stack(char **args, int size, t_stack **head)
 	*head = ft_mod_lstnew(ft_atoi(args[i]), head);
 	if (!(*head))
 		return (NULL);
-/* 	printf("%d test2\n", (*head)->content); */
 	while (--size - 1 > 0)
-	{	
+	{
+		/* printf("%d test3\n", (*head)->previous->content); */
 		curr = ft_mod_lstnew(ft_atoi(args[++i]), head);
+		/* printf("2test\n"); */
 		if (curr == NULL)
 			return (ft_mod_lstclear(head), NULL);
 	}
-/* 	printf("test\n");
-	printf("%d test3\n", (*head)->content); */
+	/* printf("%d test3\n", (*head)->content); */
 	return (*head);
 }
 
 int	ft_mod_lstsize(t_stack *lst)
 {
+	t_stack *temp; 
 	int	size;
 
-	size = 1;
 	if (!lst)
 		return (0);
-	while (lst->next != NULL)
+	temp = lst->next;
+	size = 1;
+	while (temp != lst)
 	{
-		lst = lst->next;
+		temp = temp->next;
 		++size;
 	}
 	return (size);
