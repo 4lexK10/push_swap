@@ -46,5 +46,6 @@ int		ft_char_check(char **s, int max);
 bool	overflow_check(char *s);
 void	put_order(t_stack *stack, int ac);
 void	swap_int(int *a, int *b);
+void    clear_node(t_stack **node);
 
 #endif

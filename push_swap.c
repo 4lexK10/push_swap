@@ -19,7 +19,7 @@ int main(int ac, char **av)
 	t_stack	*curr_a;
 	t_stack	*curr_b;
 	int		i;
-	 
+
 	i = 0;
 /* 	printf("%d\n", ft_check(av, ac)); */
 	if (ft_check(av, ac) == 3)
@@ -38,10 +38,14 @@ int main(int ac, char **av)
 	head_a = create_stack(av, ac, &head_a);
 	/* printf("%d\n", head_a->content); */
 	printf("%d %d\n", head_a->content, head_a->next->content);
-/* 	push(&head_b, &head_a); */
-/* 	push(&head_b, &head_a);
-	push(&head_b, &head_a); */
-	printf("%d %d\n", head_a->content, head_a->next->content);
+	push(&head_b, &head_a);
+	push(&head_b, &head_a);
+	push(&head_b, &head_a);
+	push(&head_b, &head_a);
+	push(&head_b, &head_a);
+	push(&head_b, &head_a);
+	push(&head_b, &head_a);
+/* 	printf("%d %d\n", head_a->content, head_a->next->content); */
 /* 	swap(head_a);
 	swap(head_b);
 	rotate(&head_b); */
@@ -75,6 +79,5 @@ int main(int ac, char **av)
 			curr_b = curr_b->next;
 		}
 	}
-	printf("test\n");
 	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), 0);
 }

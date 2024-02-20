@@ -24,33 +24,42 @@ void	swap(t_stack *stack)
 	swap_int(&(stack->nbr), &(stack->next->nbr));
 }
 
-int	push(t_stack **dest, t_stack **src)
+void	push(t_stack **dest, t_stack **src)
 {
 	t_stack	*temp;
 
 	if (!*src)
 		return ;
-	temp = (*src)->next;
-	(*src)->next->previous = (*src)->previous;
-	(*src)->previous->next = (*src)->next;
 	if (!*dest)
 	{
-		*dest = ft_mod_lstnew((*src)->content, dest);
-		if (!(*dest))
-			return (ft_mod_lstclear(src), 1);
-		temp = *src;
-		*src = (*src)->next;
+		if (*src == (*src)->next)
+		{
+			*dest = *src;
+			*src = NULL;
+			return ;
+		}
+		(*src)->next->previous = (*src)->previous;
 		(*src)->previous->next = (*src)->next;
-		return (ft_mod_lstclear(src), 0);
+		*dest = *src;
+		*src = (*src)->next;
+		(*dest)->next = *dest;
+		(*dest)->previous = *dest;
+		return ;
 	}
-	(*src)->next = *dest;
-	(*src)->previous = (*dest)->previous;
-	(*dest)->previous->next = *src;
-	(*dest)->previous = *src;
-	*src = temp;
-	if ((*src)->next == *src)
-		ft_mod_lstclear(src);
-	return (0);
+	temp = *src;
+	*src = (*src)->next;
+	if (*src == (*src)->next)
+		*src = NULL;
+	else
+	{
+		temp->next->previous = temp->previous;
+		temp->previous->next = temp->next;
+	}
+	temp->next = *dest;
+	temp->previous = (*dest)->previous;
+	(*dest)->previous->next = temp;
+	(*dest)->previous = temp;
+	*dest = temp;
 }
 
 void	rotate(t_stack **stack)
