@@ -79,7 +79,7 @@ int	ft_char_check(char **s, int max)
 	return (0);
 }
 
-void	put_order(t_stack *stack, int ac)
+void	put_order(t_stack *stack)
 {
 	t_stack	*temp;
 	t_stack	*current;
@@ -87,10 +87,10 @@ void	put_order(t_stack *stack, int ac)
 	int		i;
 	int		j;
 
-	i = ac;
-	j = ac;
 	if (!stack)
 		return ;
+	i = ft_mod_lstsize(stack) + 1;
+	j = ft_mod_lstsize(stack) + 1;
 	current = stack;
 	temp = stack;
 	count = 0;
@@ -102,8 +102,8 @@ void	put_order(t_stack *stack, int ac)
 				++count;
 			temp = temp->next;
 		}
-		j = ac;
-		current->nbr = count;
+		j = ft_mod_lstsize(stack) + 1;
+		current->target = count;
 		count = 0;
 		current = current->next;
 	}

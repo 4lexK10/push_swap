@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_fct_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: akloster <akloster@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 12:20:22 by marvin            #+#    #+#             */
-/*   Updated: 2024/02/20 12:20:22 by marvin           ###   ########.fr       */
+/*   Created: 2024/02/20 15:39:23 by akloster          #+#    #+#             */
+/*   Updated: 2024/02/20 15:39:23 by akloster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,3 @@ void    clear_node(t_stack **node)
     free(*node);
     *node = NULL;
 }
-

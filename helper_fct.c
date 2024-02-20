@@ -61,7 +61,7 @@ t_stack	*ft_mod_lstnew(int content, t_stack **head)
 	if (*head == NULL)
 		*head = new_node;
 	new_node->content = content;
-	new_node->nbr = 0;
+	new_node->target = 0;
 	new_node->cost = 0;
 	new_node->next = *head;
 	if (*head != new_node)

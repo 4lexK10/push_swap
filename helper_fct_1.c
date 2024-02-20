@@ -56,8 +56,6 @@ void	ft_mod_lstclear(t_stack **lst)
 		return ;
 	temp = (*lst)->next;
 	prev = temp;
-	if ((*lst)->next == *lst)
-		printf("it does! %d\n", ++i);
 	while (temp != *lst)
 	{
 		free(temp->previous);

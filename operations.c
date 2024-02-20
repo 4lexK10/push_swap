@@ -15,13 +15,10 @@
 void	swap(t_stack *stack)
 {
 	if (ft_mod_lstsize(stack) < 2)
-	{
-		printf("%dtest\n", ft_mod_lstsize(stack));
 		return ;
-	}
 	swap_int(&(stack->content), &(stack->next->content));
 	swap_int(&(stack->cost), &(stack->next->cost));
-	swap_int(&(stack->nbr), &(stack->next->nbr));
+	swap_int(&(stack->target), &(stack->next->target));
 }
 
 void	push(t_stack **dest, t_stack **src)
@@ -84,7 +81,7 @@ void	r_rotate(t_stack **stack)
 		return (0);
 	test = create_stack_a(av, ac);
 	swap(test);
-	printf("%d, %d\n", test->nbr, test->next->nbr);
+	printf("%d, %d\n", test->target, test->next->target);
 
 	return (0);
 } */
