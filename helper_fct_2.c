@@ -79,7 +79,7 @@ int	ft_char_check(char **s, int max)
 	return (0);
 }
 
-void	put_order(t_stack *stack)
+void	put_target(t_stack *stack)
 {
 	t_stack	*temp;
 	t_stack	*current;

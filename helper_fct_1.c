@@ -49,9 +49,7 @@ void	ft_mod_lstclear(t_stack **lst)
 {
 	t_stack	*temp;
 	t_stack	*prev;
-	int i;
 
-	i = 0;
 	if (!lst || !(*lst))
 		return ;
 	temp = (*lst)->next;
@@ -84,6 +82,9 @@ t_stack	*create_stack(char **args, int size, t_stack **head)
 		if (curr == NULL)
 			return (ft_mod_lstclear(head), NULL);
 	}
+	set_value(*head);
+	put_target(*head);
+	set_positon(*head);
 	/* printf("%d test3\n", (*head)->content); */
 	return (*head);
 }
