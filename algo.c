@@ -12,30 +12,30 @@
 
 #include "push_swap.h"
 
-static	int	sorted(t_stack *first)
+int	sorted(t_stack *stack)
 {
 	t_stack	*temp;
-	int	size;
-	int	i;
+	t_stack *first;
+	int		size;
 
-	temp = first;
-	size = ft_mod_lstsize(first);
-	i = 0;
-	if (!first)
-		return (0);
-	if (temp->next == first)
-		return (1);
-	while (temp->target == i++)
+	temp = stack;
+	first = stack;
+	size = ft_mod_lstsize(stack);
+	while (size--)
+	{
+		if (first->target < temp->next->target)
+			first = temp->next;
 		temp = temp->next;
-	if (temp == first && i == size)
-		return (1);
-	temp = first->previous;
-	i = size - 1;
-	while (temp->value == i--)
-		temp = temp->previous;
-	if (temp == first->previous && i == -1)
-		return (1);
-	return (0);
+	}
+	size = ft_mod_lstsize(stack);
+	temp = first;
+	while (--size)
+	{
+		if (temp->next->target > temp->target)
+			return (0);
+		temp = temp->next;
+	}
+	return (1);
 }
 
 static void	set_start(t_stack **a, t_stack **b)
@@ -66,8 +66,6 @@ static	void	max3_algo(t_stack **a)
 	if (!a || !(*a))
 		return ;
 	if ((*a)->next == *a)
-		return ;
-	if (sorted(*a))
 		return ;
 	if (ft_mod_lstsize(*a) == 2)
 		rotate_a(a);
@@ -115,7 +113,7 @@ static void	run_operations(t_stack **a, t_stack **b)
 	if (optimal == *a)
 	{
 		size = count_rotates(optimal->target, *b);
-		printf("rb to do%d\n", size);
+		/* printf("rb to do%d\n", size); */
 		if (size < 0)
 		{
 			size = -size;
@@ -156,8 +154,8 @@ static void	run_operations(t_stack **a, t_stack **b)
 
 void	turk_algo(t_stack **a, t_stack **b)
 {
-	if (sorted(*a))
-		return ;
+	t_stack	*temp;
+
 	if (ft_mod_lstsize(*a) <= 3)
 	{
 		max3_algo(a);
@@ -167,11 +165,21 @@ void	turk_algo(t_stack **a, t_stack **b)
 	while (*a != NULL)
 	{
 		find_cost(*a, *b);
-		/*rint_stacks(*a, *b);*/
 		run_operations(a, b);
-		while ((*b)->target < find_borders(MAX, b))
-			rotate_b(b);
 	}
-/* 	while (*b != NULL)
-		push_a(a, b); */
+	while (*b != NULL)
+		push_a(a, b);
+	temp = *a;
+	while (temp->target != find_borders(MIN, *a))
+		temp = temp->next;
+	if (temp->position <= ft_mod_lstsize(*a) / 2)
+	{
+		while (temp != *a)
+			rotate_a(a);
+	}
+	else
+	{
+		while (temp != *a)
+			r_rotate_a(a);
+	}
 }

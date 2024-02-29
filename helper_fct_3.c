@@ -68,15 +68,15 @@ void	set_value(t_stack *stack)
 	}
 }
 
-int	find_borders(int min_or_max, t_stack **stack)
+int	find_borders(int min_or_max, t_stack *stack)
 {
 	t_stack *temp;
 	int		extrema;
 
-	temp = *stack;
+	temp = stack;
 	extrema = temp->target;
 	temp = temp->next;
-	while (temp != *stack)
+	while (temp != stack)
 	{
 		if (min_or_max == MAX && extrema < temp->target)
 			extrema = temp->target;
@@ -106,7 +106,7 @@ void	find_cost(t_stack *a, t_stack *b)
 		temp->cost = temp->position + 1;
 		if (ft_mod_lstsize(a) < 2 * (temp->position))
 			temp->cost = ft_mod_lstsize(a) - temp->position + 1;
-		if (current > find_borders(MIN, &b) && current < b->target)
+		if (!(inside_interval(temp->target, b)))
 			temp->cost += ABS(count_rotates(current, b));
 		temp = temp->next;
 	}

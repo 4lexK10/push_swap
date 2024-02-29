@@ -36,8 +36,6 @@ int main(int ac, char **av)
 	head_a = NULL;
 	head_b = NULL;
 	head_a = create_stack(av, ac, &head_a);
-	print_stacks(head_a, head_b);
 	turk_algo(&head_a, &head_b);
-	print_stacks(head_a, head_b);
 	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), 0);
 }

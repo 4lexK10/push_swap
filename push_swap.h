@@ -67,9 +67,11 @@ void	r_rotate_both(t_stack **a, t_stack **b);
 void	turk_algo(t_stack **a, t_stack **b);
 void	set_positon(t_stack *stack);
 void	set_value(t_stack *stack);
-int		find_borders(int min_or_max, t_stack **stack);
+int		find_borders(int min_or_max, t_stack *stack);
 void	find_cost(t_stack *a, t_stack *b);
 void    print_stacks(t_stack *a, t_stack *b);
 int		count_rotates(int target, t_stack *stack);
+int		inside_interval(int nbr, t_stack *b);
+int		sorted(t_stack *first);
 
 #endif
