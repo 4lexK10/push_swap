@@ -14,10 +14,10 @@
 # define PUSH_SWAP_H
 
 # include <stdio.h> //  <----- TAKE OUT!!!
+# include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <limits.h>
-# include "ft_printf/libftprintf.h"
 # include "libft/libft.h"
 # define ABS(Value)     Value * ((Value > 0) - (Value < 0))
 # define MAX 1

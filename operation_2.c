@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:54:48 by akloster          #+#    #+#             */
-/*   Updated: 2024/02/23 15:25:29 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/01 14:45:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	push_a(t_stack **a, t_stack **b)
 	set_value(*b);
 	set_positon(*a);
 	set_positon(*b);
-	ft_printf("pa\n");
+	write(1, "pa\n", 3);
 }
 
 void	push_b(t_stack **a, t_stack **b)
@@ -29,7 +29,7 @@ void	push_b(t_stack **a, t_stack **b)
 	set_value(*b);
 	set_positon(*a);
 	set_positon(*b);
-	ft_printf("pb\n");
+	write(1, "pb\n", 3);
 }
 
 void	swap_a(t_stack **a)
@@ -37,7 +37,7 @@ void	swap_a(t_stack **a)
 	swap(*a);
 	set_value(*a);
 	set_positon(*a);
-	ft_printf("sa\n");
+	write(1, "sa\n", 3);
 }
 
 void	swap_b(t_stack **b)
@@ -45,7 +45,7 @@ void	swap_b(t_stack **b)
 	swap(*b);
 	set_value(*b);
 	set_positon(*b);
-	ft_printf("sb\n");
+	write(1, "sb\n", 3);
 }
 
 void	swap_both(t_stack **a, t_stack **b)
@@ -56,7 +56,7 @@ void	swap_both(t_stack **a, t_stack **b)
 	set_value(*b);
 	set_positon(*a);
 	set_positon(*b);
-	ft_printf("ss\n");    
+	write(1, "ss\n", 3);
 }
 
 void	rotate_a(t_stack **a)
@@ -64,7 +64,7 @@ void	rotate_a(t_stack **a)
 	rotate(a);
 	set_value(*a);
 	set_positon(*a);
-	ft_printf("ra\n");
+	write(1, "ra\n", 3);
 }
 
 void	rotate_b(t_stack **b)
@@ -72,7 +72,7 @@ void	rotate_b(t_stack **b)
 	rotate(b);
 	set_value(*b);
 	set_positon(*b);
-	ft_printf("rb\n");
+	write(1, "rb\n", 3);
 }
 
 void	rotate_both(t_stack **a, t_stack **b)
@@ -83,7 +83,7 @@ void	rotate_both(t_stack **a, t_stack **b)
 	set_value(*b);
 	set_positon(*a);
 	set_positon(*b);
-	ft_printf("rr\n"); 
+	write(1, "rr\n", 3);
 }
 
 void	r_rotate_a(t_stack **a)
@@ -91,7 +91,7 @@ void	r_rotate_a(t_stack **a)
 	r_rotate(a);
 	set_value(*a);
 	set_positon(*a);
-	ft_printf("rra\n");
+	write(1, "rra\n", 4);
 }
 
 void	r_rotate_b(t_stack **b)
@@ -99,7 +99,7 @@ void	r_rotate_b(t_stack **b)
 	r_rotate(b);
 	set_value(*b);
 	set_positon(*b);
-	ft_printf("rrb\n");
+	write(1, "rrb\n", 4);
 }
 
 void	r_rotate_both(t_stack **a, t_stack **b)
@@ -110,5 +110,5 @@ void	r_rotate_both(t_stack **a, t_stack **b)
 	set_value(*b);
 	set_positon(*a);
 	set_positon(*b);
-	ft_printf("rrr\n");
+	write(1, "rrr\n", 4);
 }

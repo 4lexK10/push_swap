@@ -31,11 +31,11 @@ int main(int ac, char **av)
 		ac = i;
 	}
 	if (ft_check(av, ac) == 1)
-		return (ft_printf("Error\n"));
-	
+		return (write(1, "Error\n", 6));
 	head_a = NULL;
 	head_b = NULL;
 	head_a = create_stack(av, ac, &head_a);
 	turk_algo(&head_a, &head_b);
+	print_stacks(head_a, head_b);
 	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), 0);
 }
