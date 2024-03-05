@@ -16,17 +16,25 @@ bool	check_argtype(char *s)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
+	while (s[i] == ' ')
+		++i;
+	if (s[i] == '\0')
+		return (0);
+	if (s[i] >= '0' && s[i] <= '9' && s[i = 1] == '\0')
+		return (1);
+	--i;
 	while (s[++i] != '\0')
+	{
 		if (s[i] == ' ')
 			return (1);
+	}
 	return (0);
 }
 
 int check_dup(char **s, int size)
 {
 	int		*dump;
-	int		temp;
 	int		i;
 	int		j;
 
@@ -37,21 +45,8 @@ int check_dup(char **s, int size)
 		return (1);
 	while (++i < size - 1)
 		dump[i] = ft_mod_atoi(s[i + j]);
-	i = 0;
-	j = 0;
-	while (i < size - 1)
-	{
-		temp = dump[i];
-		while (j < size - 1)
-		{
-			if (dump[j] == temp && j != i)
-				return (free(dump), 1);
-			++j;
-		}
-		j = 0;
-		++i;
-	}
-	return (free(dump), 0);
+	
+	return (check_dump(dump, size));
 }
 
 int	ft_char_check(char **s, int max)
@@ -61,6 +56,10 @@ int	ft_char_check(char **s, int max)
 
 	i = 1;
 	j = -1;
+/* 	for (int i = 0; s[i] != NULL; i++)
+	{
+		printf("s |%s|\n", s[i]);
+	} */
 	while (i < max)
 	{
 		if (!s[i] || s[i][0] == '\0')
@@ -70,7 +69,7 @@ int	ft_char_check(char **s, int max)
 				return (1);
 		while (s[i][++j] != '\0')
 			if (s[i][j] < '0' || s[i][j] > '9')
-				return (1);
+				return (/* printf("test4\n"),  */1);
 		if (overflow_check(s[i]))
 			return (1);
 		++i;

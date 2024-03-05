@@ -12,7 +12,6 @@ void    print_stacks(t_stack *a, t_stack *b)
 	{
 		printf("content: %d", curr_a->content);
 		printf(" target: %d", curr_a->target);
-		printf(" value: %d", curr_a->value);
 		printf(" posotion: %d", curr_a->position);
 		printf(" cost: %d\n", curr_a->cost);
 		curr_a = curr_a->next;
@@ -20,7 +19,6 @@ void    print_stacks(t_stack *a, t_stack *b)
 		{
 			printf("content: %d", curr_a->content);
 			printf(" target: %d", curr_a->target);
-			printf(" value: %d", curr_a->value);
 			printf(" posotion: %d", curr_a->position);
 			printf(" cost: %d\n", curr_a->cost);
 			curr_a = curr_a->next;
@@ -31,7 +29,6 @@ void    print_stacks(t_stack *a, t_stack *b)
 	{
 		printf("content: %d", curr_b->content);
 		printf(" target: %d", curr_b->target);
-		printf(" value: %d", curr_b->value);
 		printf(" posotion: %d", curr_b->position);
 		printf(" cost: %d\n", curr_b->cost);
 		curr_b = curr_b->next;
@@ -39,7 +36,6 @@ void    print_stacks(t_stack *a, t_stack *b)
 		{
 			printf("content: %d", curr_b->content);
 			printf(" target: %d", curr_b->target);
-			printf(" value: %d", curr_b->value);
 			printf(" posotion: %d", curr_b->position);
 			printf(" cost: %d\n", curr_b->cost);
 			curr_b = curr_b->next;

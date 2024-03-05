@@ -76,16 +76,13 @@ t_stack	*create_stack(char **args, int size, t_stack **head)
 		return (NULL);
 	while (--size - 1 > 0)
 	{
-		/* printf("%d test3\n", (*head)->previous->content); */
 		curr = ft_mod_lstnew(ft_atoi(args[++i]), head);
-		/* printf("2test\n"); */
 		if (curr == NULL)
 			return (ft_mod_lstclear(head), NULL);
 	}
-	set_value(*head);
+	(*head)->stack_size = size - 1;
 	put_target(*head);
 	set_positon(*head);
-	/* printf("%d test3\n", (*head)->content); */
 	return (*head);
 }
 

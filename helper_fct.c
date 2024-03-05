@@ -40,21 +40,21 @@ bool	overflow_check(char *s)
 
 int		ft_check(char **s, int max)
 {
-	if (max == 1)
+	if (max < 2)
 		return (3);
-	if (!(*s) || max < 2 || check_dup(s, max))
-		return (1);
-	if (s[1] && check_argtype(s[1]))
-		return (2);
-	return (ft_char_check(s, max));
+	if (!(*s) || check_dup(s, max))
+		return (/* printf("test1\n"),  */1);
+	if (s[1] && check_argtype(s[1]) && !s[2])
+	{
+		return (/* printf("test2\n"),  */2);
+	}
+	return (/* printf("test3\n"),  */ft_char_check(s, max));
 }
 
 t_stack	*ft_mod_lstnew(int content, t_stack **head)
 {
 	t_stack	*new_node;
-/* 	int i;
 
-	i = 0; */
 	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (!new_node)
 		return (NULL);
@@ -64,6 +64,11 @@ t_stack	*ft_mod_lstnew(int content, t_stack **head)
 	new_node->target = 0;
 	new_node->cost = 0;
 	new_node->priority = 0;
+	new_node->stack_size = 0;
+	new_node->ra = 0;
+	new_node->rb = 0;
+	new_node->rra = 0;
+	new_node->rrb = 0;
 	new_node->next = *head;
 	if (*head != new_node)
 	{
@@ -73,7 +78,6 @@ t_stack	*ft_mod_lstnew(int content, t_stack **head)
 	}
 	else 
 		new_node->previous = *head;
-/* 	printf("%d->node #%d\n", new_node->content, ++i); */
 	return (new_node);
 }
 

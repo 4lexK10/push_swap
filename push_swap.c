@@ -16,18 +16,23 @@ int main(int ac, char **av)
 {
 	t_stack	*head_a;
 	t_stack	*head_b;
+	int		malloc_av;
 	int		i;
 
+	malloc_av = 0;
 	i = 0;
 	if (ft_check(av, ac) == 3)
 		return (0);
 	if (ft_check(av, ac) == 2)
 	{
 		av = ft_split(ft_strjoin("./pushswap ", av[1]), ' ');
+		if (!av)
+			return (write(1, "Error\n", 6), 0);
+		malloc_av = 1;
 		while (av[i] != NULL)
 			++i;
 		if (av[1][0] == '\0')
-			return (0);
+			return (my_free(av, NULL), 0);
 		ac = i;
 	}
 	if (ft_check(av, ac) == 1)
@@ -35,7 +40,17 @@ int main(int ac, char **av)
 	head_a = NULL;
 	head_b = NULL;
 	head_a = create_stack(av, ac, &head_a);
+	if (!head_a)
+	{
+		if (malloc_av == 1)
+		{
+			i = 0;
+			while (av[i] != NULL)
+				free(av[i++]);
+			free(av);
+		}
+		return (0);
+	}
 	turk_algo(&head_a, &head_b);
-	print_stacks(head_a, head_b);
 	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), 0);
 }

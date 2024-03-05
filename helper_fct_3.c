@@ -48,14 +48,14 @@ void	set_value(t_stack *stack)
 
 	if (!stack)
 		return ;
-	i = ft_mod_lstsize(stack) + 1;
-	j = ft_mod_lstsize(stack) + 1;
+	i = ft_mod_lstsize(stack) + 1;  // 4
+	j = ft_mod_lstsize(stack) + 1;	// 4
 	current = stack;
 	temp = stack;
 	count = 0;
-	while (--i)
+	while (--i) // 3
 	{
-		while (--j)
+		while (--j)  // 3
 		{
 			if (temp != current && temp->content < current->content)
 				++count;
@@ -94,20 +94,35 @@ void	find_cost(t_stack *a, t_stack *b)
 {
 	t_stack *temp;
 	int		size;
-	int		current;
+	int		b_rotates;
 /* 	int		i; */
 
 	temp = a;
-	size = ft_mod_lstsize(a);
+	size = a->stack_size;
 /* 	i = 1; */
 	while (size--)
 	{
-		current = temp->target;
+		temp->ra = 0;
+		temp->rra = 0;
+		temp->rb = 0;
+		temp->rrb = 0;
+		b_rotates = count_rotates(temp->target, b);
 		temp->cost = temp->position + 1;
-		if (ft_mod_lstsize(a) < 2 * (temp->position))
-			temp->cost = ft_mod_lstsize(a) - temp->position + 1;
+		if (a->stack_size < 2 * (temp->position))
+		{
+			temp->cost = a->stack_size - temp->position + 1;
+			temp->rra = a->stack_size - temp->position;
+		}
+		else
+			temp->ra = temp->position;
 		if (!(inside_interval(temp->target, b)))
-			temp->cost += ABS(count_rotates(current, b));
+		{
+			temp->cost += ABS(b_rotates);
+			if (b_rotates < 0)
+				temp->rrb = -b_rotates;
+			if (b_rotates > 0)
+				temp->rb = b_rotates;
+		}
 		temp = temp->next;
 	}
 /* 	size = ft_mod_lstsize(a);

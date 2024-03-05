@@ -17,9 +17,8 @@ NAME			=	push_swap
 CFLAGS			=	-Wall -Wextra -Werror
 
 SRC				=	helper_fct.c helper_fct_1.c helper_fct_2.c push_swap.c \
-					operations.c algo.c
-
-FT_PRINTF		=	ft_printf/libftprintf.a
+					operations.c algo.c operation_2.c helper_fct_3.c \
+					helper_fct_4.c throw_aways.c
 
 LIBFT			=	libft/libft.a
 
@@ -30,9 +29,8 @@ OBJ				=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 RM				=	rm -rf
 
 $(NAME):		$(OBJ_DIR) $(OBJ)
-				make -C ./ft_printf
 				make bonus -C ./libft
-				$(CC) $(FLAGS) $(OBJ) $(FT_PRINTF) $(LIBFT) -o $@
+				$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $@
 
 all:			$(NAME)
 
@@ -43,12 +41,10 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)
 
 clean:
-				make clean -C ft_printf
 				make clean -C libft
 				$(RM) $(OBJ)
 
 fclean:			clean
-				make fclean -C ft_printf
 				make fclean -C libft
 				$(RM) $(OBJ) $(NAME) $(OBJ_DIR)
 				

@@ -31,6 +31,11 @@ typedef struct s_stack
 	int				position;
 	int				cost;
 	int 			priority;
+	int				stack_size;
+	int				ra;
+	int				rb;
+	int				rra;
+	int				rrb;
 	struct s_stack	*previous;
 	struct s_stack	*next;
 }					t_stack;
@@ -73,5 +78,7 @@ void    print_stacks(t_stack *a, t_stack *b);
 int		count_rotates(int target, t_stack *stack);
 int		inside_interval(int nbr, t_stack *b);
 int		sorted(t_stack *first);
+char	*my_free(char **str, char **buf);
+int		check_dump(int *dump, int size);
 
 #endif

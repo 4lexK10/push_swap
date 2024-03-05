@@ -33,11 +33,52 @@ int count_rotates(int nbr, t_stack *b)
 
 int	inside_interval(int nbr, t_stack *b)
 {
-	if (nbr > find_borders(MAX, b) && b->target == find_borders(MAX, b))
+	int max;
+
+	max = find_borders(MAX, b);
+	if (nbr > max && b->target == max)
 		return (1);
-	if (nbr < find_borders(MIN, b) && b->target == find_borders(MAX, b))
+	if (nbr < find_borders(MIN, b) && b->target == max)
 		return (1);
 	if (nbr > b->target && nbr < b->previous->target)
 		return (1);
 	return (0);
+}
+
+char	*my_free(char **str, char **buf)
+{
+	if (*str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+	if (*buf)
+	{
+		free(*buf);
+		*buf = NULL;
+	}
+	return (NULL);
+}
+
+int	check_dump(int *dump, int size)
+{
+	int	i;
+	int	j;
+	int	temp;
+
+	i = 0;
+	j = 0;
+	while (i < size - 1)
+	{
+		temp = dump[i];
+		while (j < size - 1)
+		{
+			if (dump[j] == temp && j != i)
+				return (free(dump), 1);
+			++j;
+		}
+		j = 0;
+		++i;
+	}
+	return (free(dump), 0);
 }
