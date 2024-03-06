@@ -21,7 +21,7 @@ bool	check_argtype(char *s)
 		++i;
 	if (s[i] == '\0')
 		return (0);
-	if (s[i] >= '0' && s[i] <= '9' && s[i = 1] == '\0')
+	if (s[i] >= '0' && s[i] <= '9' && s[i + 1] == '\0')
 		return (1);
 	--i;
 	while (s[++i] != '\0')

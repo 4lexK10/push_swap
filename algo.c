@@ -72,21 +72,21 @@ static	void	max3_algo(t_stack **a)
 		rotate_a(a);
 	if (ft_mod_lstsize(*a) == 3)
 	{
-		if ((*a)->value == 0 && (*a)->previous->value == 1)
+		if ((*a)->target == 0 && (*a)->previous->target == 1)
 		{
 			swap_a(a);
 			rotate_a(a);
 		}
-		if ((*a)->value == 1 && (*a)->previous->value == 2)
+		if ((*a)->target == 1 && (*a)->previous->target == 2)
 			swap_a(a);
-		if ((*a)->value == 1 && (*a)->previous->value == 0)
+		if ((*a)->target == 1 && (*a)->previous->target == 0)
 			r_rotate_a(a);
-		if ((*a)->value == 2 && (*a)->previous->value == 0)
+		if ((*a)->target == 2 && (*a)->previous->target == 0)
 		{	
 			swap_a(a);
 			r_rotate_a(a);
 		}
-		if ((*a)->value == 2 && (*a)->previous->value == 1)
+		if ((*a)->target == 2 && (*a)->previous->target == 1)
 			r_rotate_a(a);
 	}
 }
@@ -178,6 +178,7 @@ void	turk_algo(t_stack **a, t_stack **b)
 	while (*a != NULL)
 	{
 		find_cost(*a, *b);
+		/* print_stacks(*a, *b); */
 		run_operations(a, b);
 	}
 	while (*b != NULL)

@@ -33,6 +33,8 @@ int main(int ac, char **av)
 			++i;
 		if (av[1][0] == '\0')
 			return (my_free(av, NULL), 0);
+/* 		for (int i = 0; av[i] != NULL; ++i)
+			printf("|%s|\n", av[i]); */
 		ac = i;
 	}
 	if (ft_check(av, ac) == 1)
@@ -52,5 +54,6 @@ int main(int ac, char **av)
 		return (0);
 	}
 	turk_algo(&head_a, &head_b);
+/* 	print_stacks(head_a, head_b); */
 	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), 0);
 }
