@@ -54,6 +54,6 @@ int main(int ac, char **av)
 		return (0);
 	}
 	turk_algo(&head_a, &head_b);
-/* 	print_stacks(head_a, head_b); */
+	print_stacks(head_a, head_b);
 	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), 0);
 }

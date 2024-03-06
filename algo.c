@@ -64,29 +64,28 @@ static void	set_start(t_stack **a, t_stack **b)
 
 static	void	max3_algo(t_stack **a)
 {
-	if (!a || !(*a))
-		return ;
+	set_value(*a);
 	if ((*a)->next == *a)
 		return ;
 	if (ft_mod_lstsize(*a) == 2 && (*a)->target > (*a)->next->target)
 		rotate_a(a);
 	if (ft_mod_lstsize(*a) == 3)
 	{
-		if ((*a)->target == 0 && (*a)->previous->target == 1)
+		if ((*a)->value == 0 && (*a)->previous->value == 1)
 		{
 			swap_a(a);
 			rotate_a(a);
 		}
-		if ((*a)->target == 1 && (*a)->previous->target == 2)
+		else if ((*a)->value == 1 && (*a)->previous->value == 2)
 			swap_a(a);
-		if ((*a)->target == 1 && (*a)->previous->target == 0)
+		else if ((*a)->value == 1 && (*a)->previous->value == 0)
 			r_rotate_a(a);
-		if ((*a)->target == 2 && (*a)->previous->target == 0)
+		else if ((*a)->value == 2 && (*a)->previous->value == 0)
 		{	
 			swap_a(a);
 			r_rotate_a(a);
 		}
-		if ((*a)->target == 2 && (*a)->previous->target == 1)
+		else if ((*a)->value == 2 && (*a)->previous->value == 1)
 			r_rotate_a(a);
 	}
 }
@@ -172,6 +171,31 @@ void	turk_algo(t_stack **a, t_stack **b)
 	if (ft_mod_lstsize(*a) <= 3)
 	{
 		max3_algo(a);
+		return ;
+	}
+	if (ft_mod_lstsize(*a) == 5)
+	{
+		t_stack	*temp; 
+		int	nbr;
+	
+		nbr = (*b)->target;
+		push_b(a, b);
+		push_b(a, b);
+		max3_algo(a);
+		printf("test\n");
+		if (nbr > find_borders(MAX, *b) || nbr < find_borders(MIN, *b))
+			push_a(a, b);
+		temp = *b;
+		nbr = (*b)->target;
+		while (!inside_interval(nbr, temp))
+			temp = temp->next;
+		if (temp->position >= 2)
+			while (temp != *b)
+				r_rotate_a(a);
+		else if (temp->position > 0)
+			while (temp != *b)
+				rotate_a(a);
+		push(a, b);
 		return ;
 	}
 	set_start(a, b);
