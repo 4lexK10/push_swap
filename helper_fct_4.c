@@ -82,3 +82,34 @@ int	check_dump(int *dump, int size)
 	}
 	return (free(dump), 0);
 }
+
+void	small_turk_aglo(t_stack **a, t_stack **b)
+{
+	int	nbr;
+
+	push_b(a, b);
+	push_b(a, b);
+	max3_algo(a);
+	while (*b != NULL)
+	{
+		nbr = (*b)->target;
+		/* printf("test |%d|\n", nbr); */
+		if (nbr > find_borders(MAX, *a) || nbr < find_borders(MIN, *a))
+			push_a(a, b);
+		else
+		{
+			/* printf("1test |%d|\n", (*a)->target); */
+			while (nbr > (*a)->target)
+				rotate_a(a);
+			push_a(a, b);
+			set_value(*a);
+			if ((*a)->value >= 2)
+			{
+				while ((*a)->value != 0)
+					rotate_a(a);
+			}
+			else if ((*a)->value == 1)
+				r_rotate_a(a);
+		}
+	}
+}

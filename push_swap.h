@@ -80,5 +80,7 @@ int		inside_interval(int nbr, t_stack *b);
 int		sorted(t_stack *first);
 char	*my_free(char **str, char **buf);
 int		check_dump(int *dump, int size);
+void	small_turk_aglo(t_stack **a, t_stack **b);
+void	max3_algo(t_stack **a);
 
 #endif
