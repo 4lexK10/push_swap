@@ -15,27 +15,18 @@
 int	sorted(t_stack *stack)
 {
 	t_stack	*temp;
-	t_stack *first;
 	int		size;
 
 	temp = stack;
-	first = stack;
 	size = stack->stack_size;
-	while (size--)
-	{
-		if (first->target < temp->next->target)
-			first = temp->next;
-		temp = temp->next;
-	}
-	size = stack->stack_size;
-	temp = first;
 	while (--size)
 	{
-		if (temp->next->target > temp->target)
-			return (0);
-		temp = temp->next;
+		if (temp->target < temp->next->target)
+			temp = temp->next;
 	}
-	return (1);
+	if (temp->next == stack)
+		return (1);
+	return (0);
 }
 
 static void	set_start(t_stack **a, t_stack **b)
@@ -56,7 +47,7 @@ static void	set_start(t_stack **a, t_stack **b)
 	else if ((*b)->value == 1 && (*b)->previous->value == 0)
 		swap_b(b);
 	else if ((*b)->value == 2 && (*b)->previous->value == 1)
-	{	
+	{
 		swap_b(b);
 		rotate_b(b);
 	}
@@ -81,7 +72,7 @@ void	max3_algo(t_stack **a)
 		else if ((*a)->value == 1 && (*a)->previous->value == 0)
 			r_rotate_a(a);
 		else if ((*a)->value == 2 && (*a)->previous->value == 0)
-		{	
+		{
 			swap_a(a);
 			r_rotate_a(a);
 		}
@@ -93,9 +84,8 @@ void	max3_algo(t_stack **a)
 static void	run_operations(t_stack **a, t_stack **b)
 {
 	t_stack	*temp;
-	t_stack *optimal;
+	t_stack	*optimal;
 	int		size;
-	int		rotates;
 	int		i;
 
 	temp = *a;
@@ -107,95 +97,39 @@ static void	run_operations(t_stack **a, t_stack **b)
 		return ;
 	}
 	i = size;
-	while(--i)
+	while (--i)
 	{
 		temp = temp->next;
 		if (temp->cost < optimal->cost)
 			optimal = temp;
 	}
-	if (optimal == *a)
-	{
-		if (optimal->rb > 0)
-		{
-			rotates = optimal->rb;
-			while (rotates--)
-				rotate_b(b);
-			optimal->rb = 0;
-		}
-		else if (optimal->rrb > 0)
-		{
-			rotates = optimal->rrb;
-			while (rotates--)
-				r_rotate_b(b);
-			optimal->rrb = 0;
-		}
-		push_b(a, b);
-		return ;
-	}
-	if (optimal->ra > 0)
-	{
-		rotates = optimal->ra;
-		while (rotates--)
-			rotate_a(a);
-		optimal->ra = 0;
-	}
-	if (optimal->rra > 0)
-	{
-		rotates = optimal->rra;
-		while (rotates--)
-			r_rotate_a(a);
-		optimal->rra = 0;
-	}
-	if (optimal->rb > 0)
-	{
-		rotates = optimal->rb;
-		while (rotates--)
-			rotate_b(b);
-		optimal->rb = 0;
-	}
-	if (optimal->rrb > 0)
-	{
-		rotates = optimal->rrb;
-		while (rotates--)
-			r_rotate_b(b);
-		optimal->rrb = 0;
-	}
-	push_b(a, b);
+	op_2(a, b, optimal);
 }
 
 void	turk_algo(t_stack **a, t_stack **b)
 {
 	t_stack	*temp;
-	int		min;
 
-	if (ft_mod_lstsize(*a) <= 3)
-		max3_algo(a);
-	if (ft_mod_lstsize(*a) == 5)
-		small_turk_aglo(a, b);
-	else 
+	if (sorted(*a) || ft_mod_lstsize(*a) <= 5)
 	{
-		set_start(a, b);
-		while (*a != NULL)
-		{
-			find_cost(*a, *b);
-			/* print_stacks(*a, *b); */
-			run_operations(a, b);
-		}
-		while (*b != NULL)
-			push_a(a, b);
+		mini_sort(a, b);
+		return ;
 	}
+	set_start(a, b);
+	while (*a != NULL)
+	{
+		find_cost(*a, *b);
+		run_operations(a, b);
+	}
+	while (*b != NULL)
+		push_a(a, b);
 	temp = *a;
-	min = find_borders(MIN, *a);
-	while (temp->target != min)
+	while (temp->target != find_borders(MIN, *a))
 		temp = temp->next;
 	if (temp->position <= (*a)->stack_size / 2 && (*a)->target != 0)
-	{
 		while (temp != *a)
 			rotate_a(a);
-	}
 	else
-	{
 		while (temp != *a)
 			r_rotate_a(a);
-	}
 }

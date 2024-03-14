@@ -69,7 +69,6 @@ t_stack	*create_stack(char **args, int size, t_stack **head)
 	int		i;
 	t_stack	*curr;
 
-
 	i = 1;
 	*head = ft_mod_lstnew(ft_atoi(args[i]), head);
 	if (!(*head))
@@ -80,16 +79,18 @@ t_stack	*create_stack(char **args, int size, t_stack **head)
 		if (curr == NULL)
 			return (ft_mod_lstclear(head), NULL);
 	}
-	(*head)->stack_size = size - 1;
+	(*head)->stack_size = ft_mod_lstsize(*head);
 	put_target(*head);
 	set_positon(*head);
+	(*head)->min = find_borders(MIN, *head);
+	(*head)->max = find_borders(MAX, *head);
 	return (*head);
 }
 
 int	ft_mod_lstsize(t_stack *lst)
 {
-	t_stack *temp; 
-	int	size;
+	t_stack	*temp;
+	int		size;
 
 	if (!lst)
 		return (0);

@@ -1,18 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_fct_4.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akloster <akloster@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/11 18:49:55 by akloster          #+#    #+#             */
+/*   Updated: 2024/03/11 18:49:55 by akloster         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int count_rotates(int nbr, t_stack *b)
+static	int	inside_interval_variable(int nbr, t_stack *stack, t_stack *b)
 {
-	t_stack *temp;
-	t_stack *target_node;
-	int	cnt;
-	int	r_cnt;
+	int	max;
+
+	max = b->max;
+	if (nbr > max && stack->target == max)
+		return (1);
+	if (nbr < b->min && stack->target == max)
+		return (1);
+	if (nbr > stack->target && nbr < stack->previous->target)
+		return (1);
+	return (0);
+}
+
+int	count_rotates(int nbr, t_stack *b)
+{
+	t_stack	*temp;
+	t_stack	*target_node;
+	int		cnt;
+	int		r_cnt;
 
 	temp = b;
 	cnt = 0;
 	r_cnt = 0;
 	if (inside_interval(nbr, b) == 1)
 		return (0);
-	while (inside_interval(nbr, temp) == 0)
+	while (inside_interval_variable(nbr, temp, b) == 0)
 		temp = temp->next;
 	target_node = temp;
 	while (temp != b)
@@ -21,26 +47,22 @@ int count_rotates(int nbr, t_stack *b)
 		temp = temp->previous;
 	}
 	temp = target_node;
-	while (temp != b)
-	{
-		++r_cnt;
-		temp = temp->next;
-	}
+	r_cnt = count_b_r_rotates(b, temp);
 	if (r_cnt < cnt)
 		return (-r_cnt);
 	return (cnt);
 }
 
-int	inside_interval(int nbr, t_stack *b)
+int	inside_interval(int nbr, t_stack *stack)
 {
-	int max;
+	int	max;
 
-	max = find_borders(MAX, b);
-	if (nbr > max && b->target == max)
+	max = stack->max;
+	if (nbr > max && stack->target == max)
 		return (1);
-	if (nbr < find_borders(MIN, b) && b->target == max)
+	if (nbr < stack->min && stack->target == max)
 		return (1);
-	if (nbr > b->target && nbr < b->previous->target)
+	if (nbr > stack->target && nbr < stack->previous->target)
 		return (1);
 	return (0);
 }
@@ -81,35 +103,4 @@ int	check_dump(int *dump, int size)
 		++i;
 	}
 	return (free(dump), 0);
-}
-
-void	small_turk_aglo(t_stack **a, t_stack **b)
-{
-	int	nbr;
-
-	push_b(a, b);
-	push_b(a, b);
-	max3_algo(a);
-	while (*b != NULL)
-	{
-		nbr = (*b)->target;
-		/* printf("test |%d|\n", nbr); */
-		if (nbr > find_borders(MAX, *a) || nbr < find_borders(MIN, *a))
-			push_a(a, b);
-		else
-		{
-			/* printf("1test |%d|\n", (*a)->target); */
-			while (nbr > (*a)->target)
-				rotate_a(a);
-			push_a(a, b);
-			set_value(*a);
-			if ((*a)->value >= 2)
-			{
-				while ((*a)->value != 0)
-					rotate_a(a);
-			}
-			else if ((*a)->value == 1)
-				r_rotate_a(a);
-		}
-	}
 }

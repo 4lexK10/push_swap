@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static bool real_check(char *s)
+static	bool	real_check(char *s)
 {
 	int	i;
 
@@ -31,24 +31,24 @@ bool	overflow_check(char *s)
 	int	res;
 
 	res = ft_mod_atoi(s);
-	if (res == 0 && real_check(s))
+	if ((res == 0 && real_check(s)) || res > INT_MAX || res < INT_MIN)
 		return (1);
 	if (res == -1 && real_check(s))
 		return (1);
 	return (0);
 }
 
-int		ft_check(char **s, int max)
+int	ft_check(char **s, int max)
 {
+	if (!s)
+		return (0);
 	if (max < 2)
 		return (3);
 	if (!(*s) || check_dup(s, max))
-		return (/* printf("test1\n"),  */1);
+		return (1);
 	if (s[1] && check_argtype(s[1]) && !s[2])
-	{
-		return (/* printf("test2\n"),  */2);
-	}
-	return (/* printf("test3\n"),  */ft_char_check(s, max));
+		return (2);
+	return (ft_char_check(s, max));
 }
 
 t_stack	*ft_mod_lstnew(int content, t_stack **head)
@@ -65,10 +65,8 @@ t_stack	*ft_mod_lstnew(int content, t_stack **head)
 	new_node->cost = 0;
 	new_node->priority = 0;
 	new_node->stack_size = 0;
-	new_node->ra = 0;
-	new_node->rb = 0;
-	new_node->rra = 0;
-	new_node->rrb = 0;
+	new_node->min = 0;
+	new_node->max = 0;
 	new_node->next = *head;
 	if (*head != new_node)
 	{

@@ -13,13 +13,12 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h> //  <----- TAKE OUT!!!
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <stdio.h>
 # include <limits.h>
 # include "libft/libft.h"
-# define ABS(Value)     Value * ((Value > 0) - (Value < 0))
 # define MAX 1
 # define MIN -1
 
@@ -30,12 +29,14 @@ typedef struct s_stack
 	int				content;
 	int				position;
 	int				cost;
-	int 			priority;
+	int				priority;
 	int				stack_size;
 	int				ra;
 	int				rb;
 	int				rra;
 	int				rrb;
+	int				max;
+	int				min;
 	struct s_stack	*previous;
 	struct s_stack	*next;
 }					t_stack;
@@ -59,7 +60,7 @@ void	put_target(t_stack *stack);
 void	rotate_b(t_stack **b);
 void	swap_int(int *a, int *b);
 void	rotate_a(t_stack **a);
-void    clear_node(t_stack **node);
+void	clear_node(t_stack **node);
 void	push_a(t_stack **a, t_stack **b);
 void	swap_both(t_stack **a, t_stack **b);
 void	swap_b(t_stack **b);
@@ -74,7 +75,6 @@ void	set_positon(t_stack *stack);
 void	set_value(t_stack *stack);
 int		find_borders(int min_or_max, t_stack *stack);
 void	find_cost(t_stack *a, t_stack *b);
-void    print_stacks(t_stack *a, t_stack *b);
 int		count_rotates(int target, t_stack *stack);
 int		inside_interval(int nbr, t_stack *b);
 int		sorted(t_stack *first);
@@ -82,5 +82,14 @@ char	*my_free(char **str, char **buf);
 int		check_dump(int *dump, int size);
 void	small_turk_aglo(t_stack **a, t_stack **b);
 void	max3_algo(t_stack **a);
+void	count_b_rotates(t_stack *temp, int b_rotates);
+int		count_b_r_rotates(t_stack *b, t_stack *temp);
+void	max5_apply_a_rotates(t_stack **a, t_stack **b, t_stack *temp);
+void	max5_inside_borders(t_stack **a, t_stack **b, int nbr, t_stack *temp);
+void	max5_reset(t_stack **a);
+void	op_2(t_stack **a, t_stack **b, t_stack *optimal);
+void	mini_sort(t_stack **a, t_stack **b);
+void	small_turk_aglo(t_stack **a, t_stack **b);
+int		absolute_value(int nbr);
 
 #endif

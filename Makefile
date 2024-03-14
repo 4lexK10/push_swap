@@ -18,7 +18,8 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 SRC				=	helper_fct.c helper_fct_1.c helper_fct_2.c push_swap.c \
 					operations.c algo.c operation_2.c helper_fct_3.c \
-					helper_fct_4.c throw_aways.c
+					helper_fct_4.c helper_fct_5.c operation_3.c algo_2.c \
+					mini_algo.c
 
 LIBFT			=	libft/libft.a
 

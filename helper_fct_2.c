@@ -32,7 +32,7 @@ bool	check_argtype(char *s)
 	return (0);
 }
 
-int check_dup(char **s, int size)
+int	check_dup(char **s, int size)
 {
 	int		*dump;
 	int		i;
@@ -45,7 +45,6 @@ int check_dup(char **s, int size)
 		return (1);
 	while (++i < size - 1)
 		dump[i] = ft_mod_atoi(s[i + j]);
-	
 	return (check_dump(dump, size));
 }
 
@@ -56,10 +55,6 @@ int	ft_char_check(char **s, int max)
 
 	i = 1;
 	j = -1;
-/* 	for (int i = 0; s[i] != NULL; i++)
-	{
-		printf("s |%s|\n", s[i]);
-	} */
 	while (i < max)
 	{
 		if (!s[i] || s[i][0] == '\0')
@@ -69,7 +64,7 @@ int	ft_char_check(char **s, int max)
 				return (1);
 		while (s[i][++j] != '\0')
 			if (s[i][j] < '0' || s[i][j] > '9')
-				return (/* printf("test4\n"),  */1);
+				return (1);
 		if (overflow_check(s[i]))
 			return (1);
 		++i;
@@ -86,8 +81,6 @@ void	put_target(t_stack *stack)
 	int		i;
 	int		j;
 
-	if (!stack)
-		return ;
 	i = ft_mod_lstsize(stack) + 1;
 	j = ft_mod_lstsize(stack) + 1;
 	current = stack;
@@ -110,7 +103,7 @@ void	put_target(t_stack *stack)
 
 void	swap_int(int *a, int *b)
 {
-	int temp;
+	int	temp;
 
 	temp = *a;
 	*a = *b;

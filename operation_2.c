@@ -21,6 +21,13 @@ void	push_a(t_stack **a, t_stack **b)
 		(*b)->stack_size = ft_mod_lstsize(*b);
 	set_positon(*a);
 	set_positon(*b);
+	(*a)->min = find_borders(MIN, *a);
+	(*a)->max = find_borders(MAX, *a);
+	if (*b != NULL)
+	{
+		(*b)->min = find_borders(MIN, *b);
+		(*b)->max = find_borders(MAX, *b);
+	}
 	write(1, "pa\n", 3);
 }
 
@@ -33,6 +40,13 @@ void	push_b(t_stack **a, t_stack **b)
 		(*b)->stack_size = ft_mod_lstsize(*b);
 	set_positon(*a);
 	set_positon(*b);
+	if (*a != NULL)
+	{
+		(*a)->min = find_borders(MIN, *a);
+		(*a)->max = find_borders(MAX, *a);
+	}
+	(*b)->min = find_borders(MIN, *b);
+	(*b)->max = find_borders(MAX, *b);
 	write(1, "pb\n", 3);
 }
 
@@ -41,6 +55,8 @@ void	swap_a(t_stack **a)
 	swap(*a);
 	(*a)->stack_size = ft_mod_lstsize(*a);
 	set_positon(*a);
+	(*a)->min = find_borders(MIN, *a);
+	(*a)->max = find_borders(MAX, *a);
 	write(1, "sa\n", 3);
 }
 
@@ -49,18 +65,9 @@ void	swap_b(t_stack **b)
 	swap(*b);
 	(*b)->stack_size = ft_mod_lstsize(*b);
 	set_positon(*b);
+	(*b)->min = find_borders(MIN, *b);
+	(*b)->max = find_borders(MAX, *b);
 	write(1, "sb\n", 3);
-}
-
-void	swap_both(t_stack **a, t_stack **b)
-{
-	swap(*a);
-	swap(*b);
-	(*a)->stack_size = ft_mod_lstsize(*a);
-	(*b)->stack_size = ft_mod_lstsize(*b);;
-	set_positon(*a);
-	set_positon(*b);
-	write(1, "ss\n", 3);
 }
 
 void	rotate_a(t_stack **a)
@@ -68,51 +75,7 @@ void	rotate_a(t_stack **a)
 	rotate(a);
 	(*a)->stack_size = ft_mod_lstsize(*a);
 	set_positon(*a);
+	(*a)->min = find_borders(MIN, *a);
+	(*a)->max = find_borders(MAX, *a);
 	write(1, "ra\n", 3);
-}
-
-void	rotate_b(t_stack **b)
-{
-	rotate(b);
-	(*b)->stack_size = ft_mod_lstsize(*b);
-	set_positon(*b);
-	write(1, "rb\n", 3);
-}
-
-void	rotate_both(t_stack **a, t_stack **b)
-{
-	rotate(a);  
-	rotate(b);
-	(*a)->stack_size = ft_mod_lstsize(*a);
-	(*b)->stack_size = ft_mod_lstsize(*b);
-	set_positon(*a);
-	set_positon(*b);
-	write(1, "rr\n", 3);
-}
-
-void	r_rotate_a(t_stack **a)
-{
-	r_rotate(a);
-	(*a)->stack_size = ft_mod_lstsize(*a);
-	set_positon(*a);
-	write(1, "rra\n", 4);
-}
-
-void	r_rotate_b(t_stack **b)
-{
-	r_rotate(b);
-	(*b)->stack_size = ft_mod_lstsize(*b);
-	set_positon(*b);
-	write(1, "rrb\n", 4);
-}
-
-void	r_rotate_both(t_stack **a, t_stack **b)
-{
-	r_rotate(a);
-	r_rotate(b);
-	(*a)->stack_size = ft_mod_lstsize(*a);
-	(*b)->stack_size = ft_mod_lstsize(*b);
-	set_positon(*a);
-	set_positon(*b);
-	write(1, "rrr\n", 4);
 }

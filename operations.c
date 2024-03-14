@@ -21,10 +21,28 @@ void	swap(t_stack *stack)
 	swap_int(&(stack->target), &(stack->next->target));
 }
 
-void	push(t_stack **dest, t_stack **src)
+static	void	finish_push(t_stack **dest, t_stack **src)
 {
 	t_stack	*temp;
 
+	temp = *src;
+	*src = (*src)->next;
+	if (*src == (*src)->next)
+		*src = NULL;
+	else
+	{
+		temp->next->previous = temp->previous;
+		temp->previous->next = temp->next;
+	}
+	temp->next = *dest;
+	temp->previous = (*dest)->previous;
+	(*dest)->previous->next = temp;
+	(*dest)->previous = temp;
+	*dest = temp;
+}
+
+void	push(t_stack **dest, t_stack **src)
+{
 	if (!*src)
 		return ;
 	if (!*dest)
@@ -43,20 +61,7 @@ void	push(t_stack **dest, t_stack **src)
 		(*dest)->previous = *dest;
 		return ;
 	}
-	temp = *src;
-	*src = (*src)->next;
-	if (*src == (*src)->next)
-		*src = NULL;
-	else
-	{
-		temp->next->previous = temp->previous;
-		temp->previous->next = temp->next;
-	}
-	temp->next = *dest;
-	temp->previous = (*dest)->previous;
-	(*dest)->previous->next = temp;
-	(*dest)->previous = temp;
-	*dest = temp;
+	finish_push(dest, src);
 }
 
 void	rotate(t_stack **stack)
@@ -72,16 +77,3 @@ void	r_rotate(t_stack **stack)
 		return ;
 	*stack = (*stack)->previous;
 }
-
-/* int main(char **destv, int ac)
-{
-	t_stack *test;
-	
-	if (ac < 2)
-		return (0);
-	test = create_stack_a(av, ac);
-	swap(test);
-	printf("%d, %d\n", test->target, test->next->target);
-
-	return (0);
-} */
