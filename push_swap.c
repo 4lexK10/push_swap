@@ -42,17 +42,24 @@ static void	free_ptr_array(char ***s)
 {
 	int	i;
 
-	i = -1;
-/* 	while((*s)[++i] != NULL)
-		printf("|%s|\n", (*s)[i]); */
+	/*i = -1;
+ 	while((*s)[++i] != NULL)
+		printf("|%s|\n", (*s)[i]);*/
+	i = 0;
 	if (*s != NULL)
 	{
 		while ((*s)[i] != NULL)
-			free((*s)[i++]);
+		{
+			free((*s)[i]);
+			(*s)[i] = NULL;
+			++i;
+		}
 		free(*s);
+		*s = NULL;
 	}
-/* 	while((*s)[++i] != NULL)
-		printf("|%s|\n", (*s)[i]); */
+	/*i = -1;
+ 	while((*s)[++i] != NULL)
+		printf("|%s|\n", (*s)[i]);*/
 }
 
 int	main(int ac, char **av)
@@ -68,12 +75,14 @@ int	main(int ac, char **av)
 	if (ac == 0)
 		return (0);
 	if (pre_stack != NULL)
+	{
 		head_a = NULL;
 		//head_a = create_stack(pre_stack, ac, &head_a);
+	}
 	else
 		head_a = create_stack(av, ac, &head_a);
 	if (!head_a)
 		return (free_ptr_array(&pre_stack), write(2, "Error\n", 6), 0);
 	turk_algo(&head_a, &head_b);
-	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), 0);
+	return (ft_mod_lstclear(&head_a), ft_mod_lstclear(&head_b), free_ptr_array(&pre_stack), 0);
 }
