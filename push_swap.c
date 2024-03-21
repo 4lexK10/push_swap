@@ -14,6 +14,7 @@
 
 static	int	big_check(char **av, int ac, char ***pre_stack)
 {
+	char	*str;
 	int	i;
 
 	i = 0;
@@ -21,7 +22,9 @@ static	int	big_check(char **av, int ac, char ***pre_stack)
 		return (0);
 	if (ft_check(av, ac) == 2)
 	{
-		*pre_stack = ft_split(ft_strjoin("./pushswap ", av[1]), ' ');
+		str = ft_strjoin("./pushswap ", av[1]); 
+		*pre_stack = ft_split(str, ' ');
+		free(str);
 		if (!(*pre_stack))
 			return (write(2, "Error\n", 6), 0);
 		while ((*pre_stack)[i] != NULL)
